@@ -1,8 +1,45 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap');
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+html, body {
+  background: #f7f5ef !important;  /* Ou #f8f7f3 */
+  min-height: 100vh;
+  height: 100%;
+}
+
+
+@font-face {
+  font-family: 'Boldonse';
+  src: url('/fonts/Boldonse-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+.boldonse-regular {
+  font-family: "Boldonse", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.inclusive-sans {
+  font-family: "Inclusive Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+.font-geist-sans {
+  font-family: 'Geist Sans', sans-serif;
 }
 
 @theme inline {
