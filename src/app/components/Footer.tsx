@@ -1,6 +1,5 @@
 "use client"; // <- Adicione isso na PRIMEIRA linha!
 
-import Image from "next/image";
 import { MapPin, Mail, Phone, ArrowUp, Instagram, Facebook, Home, KeyRound, UserRound, Star, Plus, House } from "lucide-react";
 
 export default function Footer() {

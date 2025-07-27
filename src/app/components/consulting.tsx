@@ -33,7 +33,7 @@ const CIDADES: Record<EstadoType, string[]> = {
 // Conversão de preço BR para número
 function parsePreco(preco: string) {
   if (!preco) return 0;
-  let val = preco.replace("R$", "").trim().replace(/\./g, "").replace(",", ".");
+  const val = preco.replace("R$", "").trim().replace(/\./g, "").replace(",", ".");
   return Math.round(Number(val));
 }
 

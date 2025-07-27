@@ -9,6 +9,7 @@ export default function Hero() {
   const [busca, setBusca] = useState("");
   const router = useRouter();
 
+  // Corrigido: tipos explicitados no parâmetro
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -22,7 +23,8 @@ export default function Hero() {
 
       // Busca por código exato (apenas números)
       const imovelPorCodigo = data.imoveis.find(
-        (item: any) => String(item.codigo) === input || String(item.id) === input
+        (item: { codigo: string | number, id: string | number }) =>
+          String(item.codigo) === input || String(item.id) === input
       );
 
       if (imovelPorCodigo) {
@@ -32,7 +34,7 @@ export default function Hero() {
 
       // Busca por cidade, bairro ou local (retorna o primeiro resultado)
       const imovelPorTermo = data.imoveis.find(
-        (item: any) =>
+        (item: { cidade: string, local: string, titulo: string, id: string | number }) =>
           item.cidade.toLowerCase().includes(input) ||
           item.local.toLowerCase().includes(input) ||
           item.titulo.toLowerCase().includes(input)
@@ -106,7 +108,7 @@ export default function Hero() {
             className="w-full md:flex-1 px-4 py-2 bg-transparent outline-none text-[#2d2a1b] placeholder:text-[#a8a089] font-normal rounded-xl border border-transparent focus:border-[#a68f61] transition"
             placeholder="Buscar cidade, bairro, condomínio ou código"
             value={busca}
-            onChange={e => setBusca(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBusca(e.target.value)}
           />
           <button
             type="submit"

@@ -4,19 +4,35 @@ import { useParams, useRouter } from "next/navigation";
 import { Bed, Bath, Car } from "lucide-react";
 import Image from "next/image";
 
+// Defina o tipo Imovel
+type Imovel = {
+  id: number;
+  imagem: string;
+  titulo: string;
+  desc: string;
+  local: string;
+  estado: string;
+  cidade: string;
+  quartos: number;
+  banheiros: number;
+  vagas: number;
+  codigo: number;
+  preco: string;
+};
+
 export default function PaginaImovel() {
-  const { id } = useParams();
+  const params = useParams<{ id: string }>();
   const router = useRouter();
-  const [imovel, setImovel] = useState<any>(null);
+  const [imovel, setImovel] = useState<Imovel | null>(null);
 
   useEffect(() => {
     fetch("/db.json")
       .then(res => res.json())
       .then(data => {
-        const achou = data.imoveis.find((i: any) => String(i.id) === String(id));
-        setImovel(achou);
+        const achou = data.imoveis.find((i: Imovel) => String(i.id) === String(params.id));
+        setImovel(achou ?? null);
       });
-  }, [id]);
+  }, [params.id]);
 
   if (!imovel) {
     return (
@@ -38,9 +54,7 @@ export default function PaginaImovel() {
           className="object-cover object-center w-full h-full"
           style={{ filter: "brightness(0.88)" }}
         />
-        {/* Overlay para degradê suave no rodapé da imagem */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#f7f5efcc] via-[#f7f5ef40] to-transparent z-10" />
-        {/* Título na imagem */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 text-center">
           <span className="bg-[#a68f61]/90 px-5 py-2 rounded-full text-xs md:text-sm font-bold text-white shadow-lg uppercase tracking-wider">
             Código: {imovel.codigo}
@@ -53,7 +67,6 @@ export default function PaginaImovel() {
 
       {/* Detalhes do imóvel */}
       <section className="w-full max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl -mt-16 mb-16 p-8 md:p-12 flex flex-col md:flex-row gap-10 items-start relative z-30">
-        {/* Fotos extras (depois pode fazer carrossel se quiser) */}
         <div className="flex-1 flex flex-col items-center md:items-start">
           <Image
             src={imovel.imagem || "/sem-imagem.jpg"}
@@ -64,8 +77,6 @@ export default function PaginaImovel() {
             style={{ maxHeight: 350 }}
           />
         </div>
-
-        {/* Infos detalhadas */}
         <div className="flex-1 flex flex-col gap-5 md:pl-8">
           <div>
             <h2 className="text-2xl md:text-3xl font-playfair font-bold text-[#685f44] mb-2">{imovel.titulo}</h2>
@@ -78,7 +89,6 @@ export default function PaginaImovel() {
           </div>
           <div className="mt-3 text-[#8c794e] font-medium">{imovel.local}</div>
           <div className="text-[#a68f61] text-xl md:text-2xl font-extrabold mt-3">{imovel.preco}</div>
-          {/* Botões de ação */}
           <div className="mt-7 flex gap-4">
             <a
               href="#contato"
