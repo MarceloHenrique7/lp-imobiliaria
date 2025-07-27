@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 export default function Contato() {
   return (
     <section
-      id="contato"
+      id="contact"
       className="w-full py-16 px-4 bg-white border-t border-[#EFE8D8]"
     >
       <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-10">
